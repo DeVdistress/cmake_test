@@ -2,7 +2,7 @@
 
 rm -r ./build
 
-if [ $1 = "d" ]; then
+if [[ $1 = "d" ]]; then
    echo "build debug..."
    cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -B build
 else
