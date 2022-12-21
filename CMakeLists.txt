@@ -1,8 +1,7 @@
-# Almost all CMake files should start with this
-# You should always specify a range with the newest
-# and oldest tested versions of CMake. This will ensure
-# you pick up the best policies.
 cmake_minimum_required(VERSION 3.1...3.23)
+
+set(PJ_NAME "cmake_test")
+set(PRJ_VER_FULL "1.0")
 
 set(CMAKE_CXX_COMPILER "clang++")
 set(CMAKE_C_COMPILER "clang")
@@ -13,9 +12,9 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lc++abi")
 # This is your project statement. You should always list languages;
 # Listing the version is nice here since it sets lots of useful variables
 project(
-  ModernCMakeExample
-  VERSION 1.0
-  LANGUAGES CXX)
+        ${PJ_NAME}
+        VERSION ${PRJ_VER_FULL}
+        LANGUAGES CXX)
 
 add_custom_target(print_config ALL
   # Prints "Config is Debug" in this single-config case
@@ -59,7 +58,13 @@ endif()
 # Link each target with other targets or add options, etc.
 
 # Adding something we can run - Output name matches target name
-add_executable(my_test ./src/test.cpp)
+file(GLOB
+        CPP_SOURCES "src/*.cpp"
+        C_SOURCES "src/*.c")
+
+include_directories("${PROJECT_SOURCE_DIR}/include")
+
+add_executable(${PROJECT_NAME} ${CPP_SOURCES} ${C_SOURCES})
 
 # Make sure you link your targets with this command. It can also link libraries and
 # even flags, so linking a target that does not exist will not give a configure-time error.

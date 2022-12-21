@@ -2,7 +2,6 @@
 #include <list>
 
 int main(){
-
         auto i = 1;
 
         std::cout << std::boolalpha << i <<"\n";
