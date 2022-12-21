@@ -1,1 +1,1 @@
-# cmake progect for testing its
+# cmake project for testing its
