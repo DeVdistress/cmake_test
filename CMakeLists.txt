@@ -38,10 +38,6 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
   )
 endif()
 
-if(Debug IN_LIST CMAKE_CONFIGURATION_TYPES)
-  # ...
-endif()
-  
 # If you set any CMAKE_ variables, that can go here.
 # (But usually don't do this, except maybe for C++ standard)
 
