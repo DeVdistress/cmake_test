@@ -1,11 +1,11 @@
 #include "test_shared_ptr.h"
-#include <iostream>
+#include "test_variadic_templates.h"
 
 int main() {
-#if(1)  //test linking of c++abi"
+#if(0)  //test linking of c++abi"
         std::cout << std::boolalpha << true << "\n";
 #endif
-#if(1)  //test shared_ptr
+#if(0)  //test shared_ptr
         // Please see   https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls
         //              https://habr.com/ru/post/191018/ 
         {
@@ -29,6 +29,9 @@ int main() {
                 Derived instance(3);
             }
         }
+#endif
+#if(1)  //test variadic templates
+        TestVariadicTemplate::run(std::tuple {10, 20, 3.14, "Hello World!", true});
 #endif
         return 0;
 }
