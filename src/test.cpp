@@ -33,5 +33,13 @@ int main() {
 #if(1)  //test variadic templates
         TestVariadicTemplate::run(std::tuple {10, 20, 3.14, "Hello World!", true});
 #endif
+#if(1) // move construct
+    TestClass b1 = TestClass::factory("123");	// срабатывает конструктор перемещения
+    TestClass b2 = b1;							// срабатывает конструктор копирования
+    b2 = TestClass::factory("123");				// срабатывает конструктор перемещения, затем оператор перемещения
+    b2 = b1;									// срабатывает оператор присваивания
+    TestClass b3(*new TestClass("345"));
+    TestClass b4(TestClass("345"));
+#endif
         return 0;
 }

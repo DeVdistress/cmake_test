@@ -6,6 +6,12 @@
 #include <iostream>
 #include <tuple>
 
+// Please see   https://habr.com/ru/company/otus/blog/655715/
+//              https://habr.com/ru/company/otus/blog/656363/
+//              https://habr.com/ru/post/165765/
+//              https://habr.com/ru/post/165765/
+// std::move vs. std::forward - https://habr.com/ru/post/568306/
+
 struct TestVariadicTemplate {
 
     template<typename... Args>
