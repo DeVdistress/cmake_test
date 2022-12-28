@@ -41,8 +41,8 @@ struct TestVariadicTemplate {
                 );
     }
 
-    template <typename TupleT>
-    static void run(TupleT&& tp) {
+    template<typename... Args>
+    static void run(std::tuple<Args...>&& tp) {
         std::cout << "\n1)-=-=-=-=-=-" << std::endl;
 
         printTupleApplyFn(tp);
