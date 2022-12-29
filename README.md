@@ -1,1 +1,1 @@
-# cmake project for testing its
+# cmake project for testing obvious and not quite features in c++
