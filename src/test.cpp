@@ -10,24 +10,25 @@ int main() {
         // Please see   https://stackoverflow.com/questions/2254263/order-of-member-constructor-and-destructor-calls
         //              https://habr.com/ru/post/191018/ 
         {
+            int test_num = 1;
             // this works well
             {
-                Derived instance(0);
+                Derived instance(test_num++);
             }
 
             // this works well
             {
-                Derived instance(1);
+                Derived instance(test_num++);
             }
 
             // first_one will be destroyed before second_one 
             {
-                Derived instance(2);
+                Derived instance(test_num++);
             }
 
             // first_one and second_one won't be destroyed
             {
-                Derived instance(3);
+                Derived instance(test_num++);
             }
         }
 #endif

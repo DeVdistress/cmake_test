@@ -41,15 +41,15 @@ Derived::Derived(int tests_num) : BaseOne(tests_num), BaseTwo(),
     std::cout << "  Derived::Derived()\n";
 
     switch (tests_num) {
-        case 0: // ok
-            break;
         case 1: // ok
+            break;
+        case 2: // ok
             second_one_ptr->ptr = first_one_ptr;
             break;
-        case 2: // first_one will be destroyed before second_one 
+        case 3: // first_one will be destroyed before second_one
             first_one_ptr->ptr = second_one_ptr;
             break;
-        case 3: // first_one and second_one won't be destroyed
+        case 4: // first_one and second_one won't be destroyed
             first_one_ptr->ptr = second_one_ptr;
             second_one_ptr->ptr = first_one_ptr;
             break;
