@@ -11,7 +11,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 if(LINUX) 
-    message(STATUS ">>> Linux")
+    message(STATUS ">>> Working on Linux")
     # set(CMAKE_CXX_COMPILER "clang++")
     # set(CMAKE_C_COMPILER "clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
@@ -24,11 +24,12 @@ if(LINUX)
       "$<$<CONFIG:RELEASE>:-O2;-g0>"
     )
 else()
-    message(STATUS ">>> Not Linux")
-    set(CMAKE_CXX_EXTENSIONS OFF)
-
     if (WIN32 OR MSVC)
-        if (MSVC_VERSION GREATER_EQUAL "1900")
+	
+	set(CMAKE_CXX_EXTENSIONS OFF)
+	message(STATUS ">>> Working on Windows")
+        
+	if (MSVC_VERSION GREATER_EQUAL "1900")
             include(CheckCXXCompilerFlag)
             CHECK_CXX_COMPILER_FLAG("/std:c++latest" _cpp_latest_flag_supported)
             if (_cpp_latest_flag_supported)
