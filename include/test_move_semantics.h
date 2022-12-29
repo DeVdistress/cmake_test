@@ -1,59 +1,69 @@
 #pragma once
-// https://ru.stackoverflow.com/questions/490753/%D0%9A%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D0%BE%D1%80-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F
+// Please see https://ru.stackoverflow.com/questions/490753
 
 #include <vector>
 #include <string>
+#include <iostream>
 
-class TestClass 
+class TestMoveSemantic
 {
 public:
-    TestClass() = default;
+    TestMoveSemantic()
+    {
+        std::cout << "( Default constructors ) was executed" << std::endl;
+    }
 
-    TestClass(const std::string& buff)
+    TestMoveSemantic(const std::string& buff)
     {
         pBuff = new char[buffSize];
         memcpy(pBuff, buff.c_str(), buffSize);
+        std::cout << "( Constructors ) was executed" << std::endl;
     }
 
-    ~TestClass() { destroy(); }
+    ~TestMoveSemantic() { destroy(); }
 
-    TestClass(const TestClass& other)
+    TestMoveSemantic(const TestMoveSemantic& other)
         : pBuff(nullptr)
         , buffSize(other.buffSize)
     {
         pBuff = new char[buffSize];
         memcpy(pBuff, other.pBuff, buffSize);
+        std::cout << "( Copy constructors ) was executed" << std::endl;
     }
 
-    TestClass& operator=(const TestClass& other)
+    TestMoveSemantic& operator=(const TestMoveSemantic& other)
     {
         destroy();
         buffSize = other.buffSize;
         pBuff = new char[buffSize];
         memcpy(pBuff, other.pBuff, buffSize);
+        std::cout << "( Copy assignment operator ) was executed" << std::endl;
         return *this;
     }
 
-    TestClass(TestClass&& tmp)
+    TestMoveSemantic(TestMoveSemantic&& tmp)
         : pBuff(tmp.pBuff)
         , buffSize(tmp.buffSize)
     {
         tmp.pBuff = nullptr;
+        std::cout << "( Move constructors ) was executed" << std::endl;
     }
 
-    TestClass& operator=(TestClass&& tmp)
+    TestMoveSemantic& operator=(TestMoveSemantic&& tmp)
     {
         destroy();
         buffSize = tmp.buffSize;
         pBuff = tmp.pBuff;
         tmp.pBuff = nullptr;
+        std::cout << "( Move assignment operator ) was executed" << std::endl;
         return *this;
     }
 
-    static TestClass factory(const std::string & buff)
+    static TestMoveSemantic factory(const std::string& buff)
     {
-      TestClass retBuff(buff);
-      return retBuff;
+        TestMoveSemantic retBuff(buff);
+        std::cout << "( TestMoveSemantic's Factory ) was executed" << std::endl;
+        return retBuff;
     }
 
 private:
@@ -61,6 +71,7 @@ private:
     {
         if (pBuff)
             delete[] pBuff;
+        std::cout << "( Destructor ) was executed" << std::endl;
     }
 
     char *pBuff = nullptr;
