@@ -1,13 +1,42 @@
-cmake_minimum_required(VERSION 3.1...3.23)
+﻿cmake_minimum_required(VERSION 3.1...3.23)
 
 set(PJ_NAME "cmake_test")
 set(PRJ_VER_FULL "1.0")
 
-set(CMAKE_CXX_COMPILER "clang++")
-set(CMAKE_C_COMPILER "clang")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
-add_compile_options("-stdlib=libc++")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lc++abi")
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
+if(LINUX) 
+    message(STATUS ">>> Linux")
+    # set(CMAKE_CXX_COMPILER "clang++")
+    # set(CMAKE_C_COMPILER "clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+    add_compile_options("-stdlib=libc++")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lc++abi")
+
+    add_compile_options(
+      "-Wall" "-Wpedantic" "-Wextra" "-fexceptions"
+      "$<$<CONFIG:DEBUG>:-O0;-g3>"
+      "$<$<CONFIG:RELEASE>:-O2;-g0>"
+    )
+else()
+    message(STATUS ">>> Not Linux")
+    set(CMAKE_CXX_EXTENSIONS OFF)
+
+    if (WIN32 OR MSVC)
+        if (MSVC_VERSION GREATER_EQUAL "1900")
+            include(CheckCXXCompilerFlag)
+            CHECK_CXX_COMPILER_FLAG("/std:c++latest" _cpp_latest_flag_supported)
+            if (_cpp_latest_flag_supported)
+                add_compile_options("/std:c++latest")
+            endif()
+        endif()
+    endif()
+endif()
 
 # This is your project statement. You should always list languages;
 # Listing the version is nice here since it sets lots of useful variables
@@ -21,12 +50,6 @@ add_custom_target(print_config ALL
   COMMAND ${CMAKE_COMMAND} -E echo "Config is $<CONFIG>"
   # to make quotes printable,for example
   VERBATIM
-)
-
-add_compile_options(
-  "-Wall" "-Wpedantic" "-Wextra" "-fexceptions"
-  "$<$<CONFIG:DEBUG>:-O0;-g3>"
-  "$<$<CONFIG:RELEASE>:-O2;-g0>"
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)

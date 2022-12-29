@@ -34,44 +34,55 @@ int main() {
 #if(0)  //test variadic templates
         TestVariadicTemplate::run(std::tuple {10, 20, 3.14, "Hello World!", true});
 #endif
-#if(1) // move construct
+#if(1) // move semantic
     {
         int test_num = 1;
         std::cout << "  -=-=-=-Test(" << (test_num++) << ")-=-=-=-\n";
-        //( Constructors )
-        //( TestMoveSemantic's Factory )
+        //( constructors )
+        //( factory )
+        //( move constructors)
+        //( destroy)
+        //( destructor)
         TestMoveSemantic b1 = TestMoveSemantic::factory("123");
 
         std::cout << "  -=-=-=-Test(" << (test_num++) << ")-=-=-=-\n";
-        //( Copy constructors )
+        //( copy constructors )
         TestMoveSemantic b2 = b1;
 
         std::cout << "  -=-=-=-Test(" << (test_num++) << ")-=-=-=-\n";
-        //( Constructors )
-        //( Factory )
-        //( Destructor )
-        //( Move assignment operator )
-        //( Destructor )
+        //( constructors )
+        //( factory )
+        //( move constructors)
+        //( destroy)
+        //( destructor)
+        //( destroy)
+        //( move assignment operator)
+        //( destroy)
+        //( destructor)
         b2 = TestMoveSemantic::factory("123");
 
         std::cout << "  -=-=-=-Test(" << (test_num++) << ")-=-=-=-\n";
-        //( Destructor )
-        //( Copy assignment operator )
+        // ( destroy )
+        // ( copy assignment operator )
         b2 = b1;
 
         std::cout << "  -=-=-=-Test(" << (test_num++) << ")-=-=-=-\n";
-        //( Constructors )
-        //( Copy constructors )
+        //( constructors )
+        //( copy constructors )
         TestMoveSemantic b3(*new TestMoveSemantic("345"));
 
         std::cout << "  -=-=-=-Test(" << (test_num++) << ")-=-=-=-\n";
-        //( Constructors )
+        // ( constructors )
         TestMoveSemantic b4(TestMoveSemantic("345"));
 
-        //( Destructor )
-        //( Destructor )
-        //( Destructor )
-        //( Destructor )
+        //( destroy)
+        //( destructor)
+        //( destroy)
+        //( destructor)
+        //( destroy)
+        //( destructor)
+        //( destroy)
+        //( destructor)
     }
 #endif
         return 0;
