@@ -2,10 +2,10 @@
 
 rm -r ./build
 
-if [ "$1" = "j" ] && [ "$2" = "d"]; then
+if [ "$1" = "n" ] && [ "$2" = "d"]; then
    echo "build Ninja debug..."
-   cmake -DCMAKE_BUILD_TYPE=Release -G "Ninja" -B build
-elif [[ $1 = "j" ]]; then
+   cmake -DCMAKE_BUILD_TYPE=Debug -G "Ninja" -B build
+elif [[ $1 = "n" ]]; then
    echo "build Ninja release"
    cmake -DCMAKE_BUILD_TYPE=Release -G "Ninja" -B build
 elif [[ $1 = "d" ]]; then
@@ -18,7 +18,7 @@ fi
 
 cd ./build
 
-if [[ $1 = "j" ]]; then
+if [[ $1 = "n" ]]; then
    ninja -j$(nproc --all)
 else
    make -j$(nproc --all)
