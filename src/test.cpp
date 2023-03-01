@@ -1,8 +1,10 @@
 #include "test_shared_ptr.h"
 #include "test_variadic_templates.h"
 #include "test_move_semantics.h"
+#include "test_forward_iterator.h"
 
 int main() {
+    int res = 0;
 #if(0)  //test linking of c++abi"
         std::cout << std::boolalpha << true << "\n";
 #endif
@@ -86,5 +88,8 @@ int main() {
         //( destructor)
     }
 #endif
-        return 0;
+#if(0)
+    res = forward_iterator::test_it();
+#endif
+    return res;
 }
